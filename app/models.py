@@ -4,11 +4,11 @@ from sqlalchemy import Column, Integer, String, DateTime
 
 from .database import Base
 
-class Todo(Base):
-    __table__ = "todos"
 
-    id = Column(Integer, primary_key=True, index=True)
+class Todo(Base):
+    __tablename__ = "todos"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String, unique=True, index=True)
-    descritpion = Column(Integer, primary_key=True, index=True)
-    created = Column(DateTime, default=datetime.now())
-    updated = Column(DateTime)
+    descritpion = Column(String, primary_key=True, index=True)
+    created = Column(DateTime, default=datetime.now().date())
