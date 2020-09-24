@@ -10,8 +10,19 @@ def create_todo(db:Session, todo: schema.TodoModel):
         db.commit()
     except:
         db.rollback()
-        raise
     finally:
         db.close()
-    # db.refresh(new_todo)
     return new_todo
+
+
+def update_todo(db:Session, todo: schema.TodoModel, id:int):
+    obj = db.query(models.Todo).filter(models.Todo.id == id).first()
+    obj.title= todo.title
+    obj.descritpion = todo.desc
+    try:
+        db.commit()
+    except:
+        db.rollback()
+    finally:
+        db.close()
+    return obj

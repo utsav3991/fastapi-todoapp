@@ -13,3 +13,9 @@ router = APIRouter()
 def post_todo(todo: tm, db: Session = Depends(dependencies.get_db)):
     created_todo = crud.create_todo(db, todo)
     return todo
+
+
+@router.put("/todo/update/{id}", response_model=List[tm])
+def update_todo(id: int, todo: tm, db: Session = Depends(dependencies.get_db)):
+    crud.update_todo(db, todo, id)
+    return todo
